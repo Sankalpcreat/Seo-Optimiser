@@ -6,8 +6,8 @@ import {cacheResult,getCachedResult} from '../services/cacheServices'
 export const handleSEOAnalysis=async(text:string)=>{
 try {
   const cachedResult=  await getCachedResult(text);
-  if(cacheResult){
-    return JSON.parse(cacheResult);
+  if(cachedResult){
+    return JSON.parse(cachedResult);
   }
 
  const result= await optimizeContent(text);

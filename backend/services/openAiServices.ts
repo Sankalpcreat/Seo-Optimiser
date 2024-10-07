@@ -14,18 +14,18 @@ export const optimizeContent = async (text: string) => {
             content: text,  
           },
         ],
-        max_tokens: 500, 
+        max_tokens: 500,  
       },
       {
         headers: {
-          Authorization: `Bearer ${API_KEY}`,  
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${API_KEY}`, 
+          'Content-Type': 'application/json',  
         },
       }
     );
-    return response.data;
+    return response.data; 
   } catch (error) {
     console.error('Error in OpenAI API:', error);
-    throw error;
+    throw new Error(`OpenAI API Error: ${error.response?.data?.error?.message || error.message}`);
   }
 };
