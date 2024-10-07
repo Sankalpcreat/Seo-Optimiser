@@ -30,7 +30,7 @@ export const optimizeContent = async (text: string) => {
 
     return response.data;
   } catch (error: any) {
-    // Log the detailed error information
+   
     if (error.response) {
       console.error('OpenAI API Error Response:', error.response.data);
     } else {
