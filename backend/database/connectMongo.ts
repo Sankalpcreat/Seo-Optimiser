@@ -7,8 +7,9 @@ const connectMongo =async()=>{
         }
         console.log("Mongodb Connected")
     } catch (error) {
-        consol.error("Mongodb connection Error",error)
+        console.error("Mongodb connection Error",error)
         throw error;
     }
-    export default connectMongo;
+ 
 }
+export default connectMongo;
