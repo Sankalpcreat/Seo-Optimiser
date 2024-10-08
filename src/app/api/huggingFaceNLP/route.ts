@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server'
-import { handleHuggingFaceAnalysis } from '../../../../backend/controllers/huggingFaceController';
+import { handleHuggingFaceAnalysis } from '../../../../controllers/huggingFaceController';
 
 export async function POST(request:Request){
     try {

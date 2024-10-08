@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { handleSEOAnalysis } from '../../../../backend/controllers/seoController';
+import { handleSEOAnalysis } from '../../../backend/controllers/seoController'; // Import from your backend logic
 
 export async function POST(request: Request) {
   try {

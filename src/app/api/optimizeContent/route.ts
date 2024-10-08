@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server'
-import { handleOpenAIOptimization } from '../../../../backend/controllers/openAiController';
+import { handleOpenAIOptimization } from '../../../../controllers/openAiController';
 
 export async function POST(request:Request){
     try {
