@@ -1,4 +1,4 @@
-\
+
 export const validateTextInput = (text: string): boolean => {
     if (typeof text !== 'string' || text.trim().length < 5) {
       throw new Error('Text must be at least 5 characters long');

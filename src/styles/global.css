@@ -1,0 +1,13 @@
+/* /src/styles/global.css */
+
+/* Import the Tailwind CSS base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add custom global styles here, if needed */
+
+/* Custom font */
+body {
+  font-family: 'Inter', sans-serif;
+}

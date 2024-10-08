@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
+console.log("Hugging Face API Key:", process.env.HUGGING_FACE_API_KEY);
 import express from 'express';
 import connectMongo from './database/connectMongo';
 import connectRedis from './database/connectRedis';
@@ -27,7 +28,7 @@ app.post('/api/seoAnalysis', async (req, res) => {
     await connectMongo(); 
     await connectRedis();  
 
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 4000;
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
