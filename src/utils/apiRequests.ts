@@ -3,7 +3,7 @@ import axios from 'axios';
 // Function to send a POST request to the seoAnalysis API route
 export const analyzeContent = async (text: string) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/seoAnalysis', { text });
+      const response = await axios.post('/api/seoAnalysis', { text });  // Adjusted to use relative path
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

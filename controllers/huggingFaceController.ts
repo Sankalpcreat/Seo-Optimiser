@@ -1,28 +1,12 @@
-import { analyzeText } from '../services/huggingFaceService';
-import { cacheResult, getCachedResult } from '../services/cacheServices';
+import { NextRequest, NextResponse } from 'next/server';
+import { handleHuggingFaceAnalysis } from '../services/huggingFaceService';
 
-export const handleHuggingFaceAnalysis = async (text: string) => {
+export async function POST(request: NextRequest) {
   try {
-  
-    const cachedResult = await getCachedResult(text);
-    if (cachedResult) {
-      return JSON.parse(cachedResult); 
-    }
-
- 
-    const result = await analyzeText(text);
-
-
-    await cacheResult(text, JSON.stringify(result));
-
-    return result;
-  } catch (error) {
-    if (error instanceof Error) {
-      // TypeScript now knows that error is an Error object and has a 'message' property
-      throw new Error('Hugging Face analysis failed: ' + error.message);
-    } else {
-      // For non-error objects, return a general error message
-      throw new Error('Hugging Face analysis failed with an unknown error');
-    }
+    const { text } = await request.json();
+    const result = await handleHuggingFaceAnalysis(text);
+    return NextResponse.json(result);
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-};
+}

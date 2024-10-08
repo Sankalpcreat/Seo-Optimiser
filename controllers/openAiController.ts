@@ -1,16 +1,12 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { optimizeContent } from '../services/openAiServices';
 
-export const handleOpenAIOptimization = async (text: string) => {
+export async function POST(request: NextRequest) {
   try {
+    const { text } = await request.json();
     const result = await optimizeContent(text);
-    return result;
-  } catch (error) {
-    if (error instanceof Error) {
-      // Check if error is an instance of Error to access the 'message' property
-      throw new Error('Open ai optimization failed: ' + error.message);
-    } else {
-      // For non-error objects, return a generic error message
-      throw new Error('Open ai optimization failed with an unknown error');
-    }
+    return NextResponse.json(result);
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-};
+}

@@ -6,18 +6,13 @@ if (!API_KEY) {
   throw new Error('Missing OpenAI API key. Please set the OPENAI_API_KEY environment variable.');
 }
 
-export const optimizeContent = async (text: string) => {
+export const optimizeContent = async (text: string): Promise<any> => {
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
         model: 'gpt-4-turbo',
-        messages: [
-          {
-            role: 'user',
-            content: text,
-          },
-        ],
+        messages: [{ role: 'user', content: text }],
         max_tokens: 500,
       },
       {
@@ -29,15 +24,20 @@ export const optimizeContent = async (text: string) => {
     );
 
     return response.data;
-  } catch (error: any) {
-   
-    if (error.response) {
-      console.error('OpenAI API Error Response:', error.response.data);
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        console.error('OpenAI API Error Response:', error.response.data);
+        throw new Error(`OpenAI API Error: ${error.response.data.error?.message || error.message}`);
+      } else if (error.request) {
+        console.error('OpenAI API No Response:', error.request);
+        throw new Error('No response received from OpenAI API.');
+      }
+    } else if (error instanceof Error) {
+      console.error('Unexpected Error:', error.message);
+      throw new Error(`Unexpected error: ${error.message}`);
     } else {
-      console.error('OpenAI API Request Failed:', error.message);
+      throw new Error('An unknown error occurred with OpenAI API.');
     }
-
-    // Throw a more descriptive error for the calling function
-    throw new Error(`OpenAI API Error: ${error.response?.data?.error?.message || error.message}`);
   }
 };
